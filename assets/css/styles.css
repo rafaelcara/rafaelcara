@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap');
+
+body {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* Header centralizado */
+.header {
+  text-align: center;
+  padding: 4rem 2rem 2rem 2rem; /* 4rem no topo, 2rem nas laterais e embaixo */
+  margin-top: 3rem; /* opcional, pode aumentar se quiser ainda mais espaço */
+  font-family: 'Work Sans', sans-serif;
+}
+
+/* Conteúdo centralizado com largura máxima */
+.header-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Nome e título */
+.name {
+  font-size: 2rem;
+  font-weight: bold;
+  font-weight: 700;
+}
+
+/* .title {
+  font-size: 1.2rem;
+  color: #cccccc; 
+  font-weight: 500;
+} */
+
+.description {
+  margin-top: 1rem;
+  color: #dddddd; /* parágrafo em cinza claro */
+  font-weight: 400;
+}
+
+/* Redes sociais */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+  justify-content: center;
+}
+
+/* Links dos ícones */
+.social-item a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;         /* ícones brancos */
+  transition: color 0.2s;
+}
+
+/* Hover dos ícones */
+.social-item a:hover {
+  color: #1da1f2; /* cor ao passar o mouse */
+}
+
+/* Tamanho dos ícones */
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor; /* ícones seguem a cor do link */
+}
+
+/* Foto redonda */
+.profile-photo {
+  width: 150px;           /* tamanho da foto */
+  height: 150px;
+  border-radius: 50%;     /* deixa circular */
+  object-fit: cover;      /* ajusta o conteúdo da imagem */
+  display: block;
+  margin: 0 auto 1rem;    /* centraliza e adiciona espaço abaixo */
+  border: 3px solid #ffffff; /* opcional: borda branca */
+}
