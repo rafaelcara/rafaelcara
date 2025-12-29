@@ -1,12 +1,12 @@
 :root {
-  --bg-color: #0a0a0a;
-  --card-bg: #141414;
-  --card-border: #333333;
-  --text-main: #ffffff;
-  --text-muted: #a3a3a3;
-  --accent: #ffffff;
-  --hover-border: #666666;
-  --btn-radius: 99px; /* Botões bem redondos (Pill) */
+  --bg-color: #0a0a0a;       /* Preto profundo */
+  --card-bg: #141414;        /* Cinza muito escuro para os cards */
+  --card-border: #333333;    /* Borda sutil */
+  --text-main: #ffffff;      /* Branco puro */
+  --text-muted: #a3a3a3;     /* Cinza médio */
+  --accent: #ffffff;         /* Destaque branco */
+  --hover-border: #666666;   /* Borda mais clara ao passar o mouse */
+  --btn-radius: 99px;        /* Botões bem redondos (Pill) */
 }
 
 * {
@@ -17,17 +17,45 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   margin: 0;
-  padding: 1.5rem; /* Menos padding na borda da tela */
+  padding: 1.5rem;
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
+  
+  position: relative; 
+  min-height: 100vh;
+  z-index: 1; 
+}
+
+/* --- Camada de Fundo (Escola de Atenas) --- */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+  
+  /* CORREÇÃO 1: Caminho relativo (sai da pasta css, entra na imgs) */
+  background-image: url('../imgs/athens.jpg'); 
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* CORREÇÃO 2: Filtro ajustado e sem mix-blend-mode por enquanto */
+  filter: grayscale(100%); 
+  
+  /* CORREÇÃO 3: Opacidade maior para teste */
+  opacity: 0.15; 
 }
 
 /* --- Grid Compacto --- */
 .bento-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.8rem; /* Gap menor entre os cards */
-  max-width: 800px; /* Largura total um pouco menor para leitura confortável */
+  gap: 0.8rem;
+  max-width: 800px;
   margin: 2rem auto;
 }
 
@@ -40,12 +68,12 @@ body {
   }
 }
 
-/* --- Cards (Bordas Quadradas, menos padding) --- */
+/* --- Cards (Bordas Quadradas) --- */
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 0; 
-  padding: 1.5rem; /* Reduzido de 2rem para ficar mais "baixo" */
+  border-radius: 0; /* Estilo quadrado */
+  padding: 1.5rem;
   transition: border-color 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -64,9 +92,9 @@ body {
 }
 
 .profile-photo {
-  width: 80px; /* Foto levemente menor */
+  width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 50%; /* Foto redonda */
   object-fit: cover;
   border: 2px solid #333;
 }
@@ -97,7 +125,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
-  margin-top: auto; /* Empurra para o fundo se o card for alto */
+  margin-top: auto;
 }
 
 /* Redes Sociais */
@@ -113,7 +141,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px; /* Ícones menores */
+  width: 36px;
   height: 36px;
   border-radius: 50%;
   background-color: #222;
@@ -128,6 +156,7 @@ body {
 .icon {
   width: 18px;
   height: 18px;
+  /* Força o ícone a ficar 100% branco */
   filter: brightness(0) invert(1);
 }
 
@@ -144,7 +173,7 @@ body {
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 500;
-  height: 36px; /* Mesma altura dos ícones sociais */
+  height: 36px;
   transition: all 0.2s;
 }
 
@@ -199,45 +228,50 @@ body {
   text-decoration: underline;
 }
 
-/* --- Footer --- */
+/* --- Footer (Citação Discreta) --- */
 .footer {
   text-align: center;
-  color: #444; /* Cor base escura */
-  margin-top: 4rem;
-  padding-bottom: 2rem;
+  color: var(--text-muted); /* CORRIGIDO: Usando cinza claro (#a3a3a3) em vez de escuro */
+  margin-top: 5rem;         /* Mais espaço para respirar em relação aos cards */
+  padding-bottom: 3rem;
+  position: relative;       /* Garante que fique acima do fundo */
 }
 
 .footer-quote {
-  margin-bottom: 1.5rem; /* Espaço entre a frase e o copyright */
-  opacity: 0.5;          /* Deixa bem discreto (meio transparente) */
-  transition: opacity 0.3s ease;
+  margin-bottom: 1.5rem;
+  opacity: 0.6;          /* Aumentei de 0.5 para 0.6 para melhorar a leitura */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: default;       /* Mostra que não é um link clicável */
 }
 
-/* Efeito opcional: fica mais legível se passar o mouse no rodapé */
+/* Efeito Hover: Fica 100% branco e sobe levemente */
 .footer:hover .footer-quote {
   opacity: 1;
+  transform: translateY(-2px);
+  color: var(--text-main); /* Fica branco puro ao passar o mouse */
 }
 
 .footer-quote p {
   margin: 0;
-  font-family: 'Times New Roman', serif; /* Fonte Serifada para dar um toque clássico */
+  font-family: 'Times New Roman', serif;
   font-style: italic;
-  font-size: 1rem;
-  color: var(--text-muted);
+  font-size: 1.1rem; /* Aumentei levemente para facilitar a leitura */
+  color: inherit;    /* Herda a cor definida no pai */
 }
 
 .footer-quote .author {
   display: block;
-  font-size: 0.7rem;
-  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  margin-top: 0.4rem;
   font-family: 'Inter', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em; /* Espaçamento maior entre letras fica mais elegante */
+  opacity: 0.8;
 }
 
 .copyright {
   font-size: 0.75rem;
   font-family: monospace;
   text-transform: uppercase;
-  opacity: 0.8;
+  opacity: 0.5; /* O copyright pode ficar mais apagadinho que a frase */
 }
