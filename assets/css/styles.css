@@ -1,84 +1,243 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap');
+:root {
+  --bg-color: #0a0a0a;
+  --card-bg: #141414;
+  --card-border: #333333;
+  --text-main: #ffffff;
+  --text-muted: #a3a3a3;
+  --accent: #ffffff;
+  --hover-border: #666666;
+  --btn-radius: 99px; /* Botões bem redondos (Pill) */
+}
+
+* {
+  box-sizing: border-box;
+}
 
 body {
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: var(--bg-color);
+  color: var(--text-main);
   margin: 0;
-  padding: 0;
+  padding: 1.5rem; /* Menos padding na borda da tela */
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
 }
 
-/* Header centralizado */
-.header {
-  text-align: center;
-  padding: 4rem 2rem 2rem 2rem; /* 4rem no topo, 2rem nas laterais e embaixo */
-  margin-top: 3rem; /* opcional, pode aumentar se quiser ainda mais espaço */
-  font-family: 'Work Sans', sans-serif;
+/* --- Grid Compacto --- */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem; /* Gap menor entre os cards */
+  max-width: 800px; /* Largura total um pouco menor para leitura confortável */
+  margin: 2rem auto;
 }
 
-/* Conteúdo centralizado com largura máxima */
-.header-content {
-  max-width: 600px;
-  margin: 0 auto;
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .profile-card {
+    grid-column: span 2; 
+  }
 }
 
-/* Nome e título */
+/* --- Cards (Bordas Quadradas, menos padding) --- */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0; 
+  padding: 1.5rem; /* Reduzido de 2rem para ficar mais "baixo" */
+  transition: border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  border-color: var(--hover-border);
+}
+
+/* --- Perfil --- */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.profile-photo {
+  width: 80px; /* Foto levemente menor */
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #333;
+}
+
 .name {
-  font-size: 2rem;
-  font-weight: bold;
+  margin: 0;
+  font-size: 1.4rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
-/* .title {
-  font-size: 1.2rem;
-  color: #cccccc; 
-  font-weight: 500;
-} */
+.role {
+  margin: 0.1rem 0 0 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
 
 .description {
-  margin-top: 1rem;
-  color: #dddddd; /* parágrafo em cinza claro */
-  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  max-width: 650px;
 }
 
-/* Redes sociais */
-.social-links {
+/* --- Área de Ações (Social + Email) --- */
+.actions-row {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 1rem;
+  margin-top: auto; /* Empurra para o fundo se o card for alto */
+}
+
+/* Redes Sociais */
+.social-links {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0 0 0;
-  justify-content: center;
+  margin: 0;
+  display: flex;
+  gap: 0.8rem;
 }
 
-/* Links dos ícones */
-.social-item a {
-  display: inline-flex;
+.social-links a {
+  display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;         /* ícones brancos */
-  transition: color 0.2s;
+  width: 36px; /* Ícones menores */
+  height: 36px;
+  border-radius: 50%;
+  background-color: #222;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
-/* Hover dos ícones */
-.social-item a:hover {
-  color: #1da1f2; /* cor ao passar o mouse */
+.social-links a:hover {
+  background-color: #333;
+  transform: translateY(-2px);
 }
 
-/* Tamanho dos ícones */
 .icon {
-  width: 24px;
-  height: 24px;
-  fill: currentColor; /* ícones seguem a cor do link */
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
 }
 
-/* Foto redonda */
-.profile-photo {
-  width: 150px;           /* tamanho da foto */
-  height: 150px;
-  border-radius: 50%;     /* deixa circular */
-  object-fit: cover;      /* ajusta o conteúdo da imagem */
+/* Botão de Email (Pill) */
+.email-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: 1px solid #333;
+  color: var(--text-main);
+  padding: 0.4rem 1rem;
+  border-radius: var(--btn-radius);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  height: 36px; /* Mesma altura dos ícones sociais */
+  transition: all 0.2s;
+}
+
+.email-pill:hover {
+  background-color: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+
+/* --- Projetos --- */
+.card-top {
+  margin-bottom: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tag {
+  background-color: #262626;
+  color: #ccc;
+  padding: 4px 10px;
+  border-radius: var(--btn-radius);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.project-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.15rem;
+}
+
+.project-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.project-link {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  color: #444; /* Cor base escura */
+  margin-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.footer-quote {
+  margin-bottom: 1.5rem; /* Espaço entre a frase e o copyright */
+  opacity: 0.5;          /* Deixa bem discreto (meio transparente) */
+  transition: opacity 0.3s ease;
+}
+
+/* Efeito opcional: fica mais legível se passar o mouse no rodapé */
+.footer:hover .footer-quote {
+  opacity: 1;
+}
+
+.footer-quote p {
+  margin: 0;
+  font-family: 'Times New Roman', serif; /* Fonte Serifada para dar um toque clássico */
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.footer-quote .author {
   display: block;
-  margin: 0 auto 1rem;    /* centraliza e adiciona espaço abaixo */
-  border: 3px solid #ffffff; /* opcional: borda branca */
+  font-size: 0.7rem;
+  margin-top: 0.3rem;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.copyright {
+  font-size: 0.75rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  opacity: 0.8;
 }
