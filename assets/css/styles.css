@@ -37,7 +37,7 @@ body::before {
   z-index: -1; 
   
   /* CORREÇÃO 1: Caminho relativo (sai da pasta css, entra na imgs) */
-  background-image: url('../imgs/athens.jpg'); 
+  background-image: url('../imgs/athens.webp'); 
   
   background-size: cover;
   background-position: center;
